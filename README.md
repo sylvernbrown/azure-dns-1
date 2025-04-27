@@ -230,7 +230,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-1) Log into <strong>dc-1</strong> as an administrator, navigate to the search bar, and type <strong>"run"</strong>. Then, type <strong>"gpmc.msc"</strong>. <br />
+19) Log into <strong>dc-1</strong> as an administrator, navigate to the search bar, and type <strong>"run"</strong>. Then, type <strong>"gpmc.msc"</strong>. <br />
   <br />
 <img src="https://i.imgur.com/6vxWO8i.png" height="40%" width="60%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -239,7 +239,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-2) In the <strong>Group Policy Management</strong> window, <strong>[Right Click] Default Domain > Edit</strong>.  This will allow for the configuration of account lockout settings.<br />
+20) In the <strong>Group Policy Management</strong> window, <strong>[Right Click] Default Domain > Edit</strong>.  This will allow for the configuration of account lockout settings.<br />
   <br />
 <img src="https://i.imgur.com/t4JiBjY.png" height="60%" width="80%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -249,7 +249,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-3) Navigate to: <strong>Account Lockout Policy > Account Lockout Duration | Account Lockout Threshold</strong>. <br />
+21) Navigate to: <strong>Account Lockout Policy > Account Lockout Duration | Account Lockout Threshold</strong>. <br />
   <br />
 <img src="https://i.imgur.com/D4ug1wB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -260,7 +260,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-4) Once in <strong>Account lockout duration Properties</strong>, select the desired time frame for an account to remain locked after being locked out.<br />
+22) Once in <strong>Account lockout duration Properties</strong>, select the desired time frame for an account to remain locked after being locked out.<br />
   <br />
 <img src="https://i.imgur.com/fHrNwui.png" height="40%" width="40%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -273,7 +273,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-5) Then, navigate to <strong>Account lockout threshold properties</strong> and decide on a maximum threshold for consecutive login attempts, for this example it's set at 10.<br />
+23) Then, navigate to <strong>Account lockout threshold properties</strong> and decide on a maximum threshold for consecutive login attempts, for this example it's set at 10.<br />
   <br />
 <img src="https://i.imgur.com/R2K1ZsR.png" height="40%" width="40%" alt="Disk Sanitization Steps"/> <br />
   
@@ -285,7 +285,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-6) The end result should show something like this in <strong>Group Policy Management Editor</strong>.  Notice: Default settings for <strong>"Reset account lockout counter after" & "Allow Administrator account lockout"</strong> both automatically enable.<br />
+24) The end result should show something like this in <strong>Group Policy Management Editor</strong>.  Notice: Default settings for <strong>"Reset account lockout counter after" & "Allow Administrator account lockout"</strong> both automatically enable.<br />
   <br />
 <img src="https://i.imgur.com/t9YFbDG.png" height="60%" width="80%" alt="Disk Sanitization Steps"/> <br />
   
@@ -296,7 +296,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-7) While the changes have been enabled, they would take 90 minutes to apply in the domain controller automatically.  To manually enable to configurations, login to the domain controller (dc-1) as an admin. <br />
+25) While the changes have been enabled, they would take 90 minutes to apply in the domain controller automatically.  To manually enable to configurations, login to the domain controller (dc-1) as an admin. <br />
   <br />
 <img src="https://i.imgur.com/wjIgsuH.png" height="60%" width="60%" alt="Disk Sanitization Steps"/> <br />
   
@@ -307,7 +307,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-8) Open the command prompt as an administrator, and type <strong>"gpupdate /force"</strong>.  As you can see, the updates should complete successfully.<br />
+26) Open the command prompt as an administrator, and type <strong>"gpupdate /force"</strong>.  As you can see, the updates should complete successfully.<br />
   <br />
 <img src="https://i.imgur.com/rx2Wvj6.png" height="60%" width="80%" alt="Disk Sanitization Steps"/> <br />
   
@@ -318,7 +318,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-7) While the changes have been enabled, they would take 90 minutes to apply in the domain controller automatically.  To manually enable to configurations, login to the domain controller (dc-1) as an admin. <br />
+27) While the changes have been enabled, they would take 90 minutes to apply in the domain controller automatically.  To manually enable to configurations, login to the domain controller (dc-1) as an admin. <br />
   <br />
 <img src="https://i.imgur.com/XpckAdJ.png" height="60%" width="60%" alt="Disk Sanitization Steps"/> <br />
   
@@ -329,7 +329,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-8) Open the command prompt as an administrator, and type <strong>"gpupdate /force"</strong>.  As you can see, the updates should complete successfully.<br />
+28) Open the command prompt as an administrator, and type <strong>"gpupdate /force"</strong>.  As you can see, the updates should complete successfully.<br />
   <br />
 <img src="https://i.imgur.com/BNh666T.png" height="60%" width="80%" alt="Disk Sanitization Steps"/> <br />
   
