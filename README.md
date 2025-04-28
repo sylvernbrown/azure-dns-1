@@ -28,7 +28,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <h2>Group Policy & Account Management Steps</h2>
 
 <p>
-1) Log into <strong>dc-1</strong> as an administrator, navigate to the search bar, and type <strong>"run"</strong>. Then, type <strong>"gpmc.msc"</strong>. <br />
+1) Begin by logging into both DC-1 & Client-1 as administrators.  Then, navigate to PowerShell in Client-1.<br />
   <br />
 <img src="https://i.imgur.com/1vLWOF5.png" height="40%" width="60%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -37,7 +37,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-2) In the <strong>Group Policy Management</strong> window, <strong>[Right Click] Default Domain > Edit</strong>.  This will allow for the configuration of account lockout settings.<br />
+2) Type: "ping mainframe" in the command prompt. Notice how the ping was unsuccessful because we have not set up "mainframe" in the DNS Config to route to an IP address. We will do this in the following steps and try again.<br />
   <br />
 <img src="https://i.imgur.com/lGUCvfB.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -47,7 +47,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-3) Navigate to: <strong>Account Lockout Policy > Account Lockout Duration | Account Lockout Threshold</strong>. <br />
+3) Next, type ipconfig /displaydns > test.txt. Then type notepad test.txt. <br />
   <br />
 <img src="https://i.imgur.com/mIJloYR.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -58,7 +58,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-4) Once in <strong>Account lockout duration Properties</strong>, select the desired time frame for an account to remain locked after being locked out.<br />
+4) If entered correctly, the DNS Cache should display. The DNS cache contains all recently resolved domain names and their corresponding IP addresses. If we search for mainframe, we will find that there is no DNS record in the cache to pull from.<br />
   <br />
 <img src="https://i.imgur.com/fBbdD1N.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -69,43 +69,8 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 
-
 <p>
-5) Then, navigate to <strong>Account lockout threshold properties</strong> and decide on a maximum threshold for consecutive login attempts, for this example it's set at 10.<br />
-  <br />
-<img src="https://i.imgur.com/pjpLx7x.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> <br />
-  
-</p>
-<br />
-<br />
-<br />
-<br />
-
-
-<p>
-6) The end result should show something like this in <strong>Group Policy Management Editor</strong>.  Notice: Default settings for <strong>"Reset account lockout counter after" & "Allow Administrator account lockout"</strong> both automatically enable.<br />
-  <br />
-<img src="https://i.imgur.com/CbuyEBR.png" height="60%" width="80%" alt="Disk Sanitization Steps"/> <br />
-  
-</p>
-<br />
-<br />
-<br />
-<br />
-
-<p>
-7) While the changes have been enabled, they would take 90 minutes to apply in the domain controller automatically.  To manually enable to configurations, login to the domain controller (dc-1) as an admin. <br />
-  <br />
-<img src="https://i.imgur.com/KUvtYxF.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> <br />
-  
-</p>
-<br />
-<br />
-<br />
-<br />
-
-<p>
-8) Open the command prompt as an administrator, and type <strong>"gpupdate /force"</strong>.  As you can see, the updates should complete successfully.<br />
+8) The DNS cache is different from a computer's host file. For example, try to ping "zebra", notice how the ping is unsuccessful.<br />
   <br />
 <img src="https://i.imgur.com/Iuut4V8.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -116,7 +81,19 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-9) Next, test the changes made in the domain controller by logging in incorrectly on <strong>Client-1</strong> incorrectly at least 10 times.  If the changes were successful, you should see a prompt like this. <br />
+5) You can override the DNS cache locally by using the hosts file; Navigate to: Open > Windows > System32 > drivers > etc > [open] hosts. .<br />
+  <br />
+<img src="https://i.imgur.com/CbuyEBR.png" height="60%" width="80%" alt="Disk Sanitization Steps"/> <br />  
+<img src="https://i.imgur.com/KUvtYxF.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> <br />
+  
+</p>
+<br />
+<br />
+<br />
+<br />
+
+<p>
+9) Enter a desired IP address and name it. For this example, zebra is associated with the loopback IP address 127.0.0.1. <br />
   <br />
 <img src="https://i.imgur.com/KfTAfCm.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -126,7 +103,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-10) To unlock the account <strong>bat.cop</strong> and restore access, we will have to unlock his account in Active Directory on the domain controller.  Navigate to: <strong>[dc-1 VM] > Active Directory Users and Computers > [Right Click] mydomain.com > Find > [Username]</strong>.<br />
+10) Now, when navigating back to PowerShell and pinging "zebra" the connection should be successful.<br />
   <br />
 <img src="https://i.imgur.com/jDPfW8q.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -138,10 +115,11 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-11) After finding the user you wish to unlock, navigate to the user's properties. <strong>[Right Click] "bat.cop" > Properties > Account > [Select] "Unlock account"</strong>.<br />
+11) However, using the hosts file may serve a purpose occasionally, it's best to use a DNS server to store domain names and IP addresses.  Otherwise, we'd have to manually change the IP address every time it is changed, which would not be an efficient way to scale domain names in the future.  As you can see, in PowerShell "mainframe" still has not been mapped to an IP address, so we will add it to our DNS server.<br />
   <br />
   <br />
 <img src="https://i.imgur.com/H2fKLkj.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
+<img src="https://i.imgur.com/KzfFHW4.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
 </p>
 <br />
@@ -150,23 +128,8 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 
-
-
 <p>
-12) If you need to reset a password for a particular user, once again navigate to the user.  Once you find the user, right click and select <Strong>"Reset Password".</Strong><br />
-  <br />
-<img src="https://i.imgur.com/KzfFHW4.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
-</p>
-<br />
-<br />
-<br />
-<br />
-
-
-
-
-<p>
-13) Additionally, from this panel you have the option to disable a user's account. <br />.
+13) Begin by logging into dc-1 and navigating to "DNS" and running as an administrator. <br />.
   <br />
 <img src="https://i.imgur.com/njmnuwZ.png" height="80%" width="60%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -176,7 +139,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-14) When logging into <strong>client-1</strong> with a disabled account (bat.cop), the following message would display. <br />
+14) Once in DNS Manager, navigate to dc-1 > Forward Lookup Zones > mydomain.com (created in previous tutorials on this github) > [Right Click] > [Select] New Host (A or AAAA). <br />
   <br />
 <img src="https://i.imgur.com/dv7bbZg.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
  
@@ -188,7 +151,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-15) To re-enable the account, navigate back to the user properties panel and select <strong>Enable Account</strong>.<br />
+15) Name the Host "mainframe" and map it to dc-1's local IP address (10.0.0.4 in this case).<br />
   <br />
 <img src="https://i.imgur.com/efsWCSr.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -197,7 +160,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-16) To witness failed/successful logins by username, login to the domain controller (dc-1) navigate to search and type <strong>"eventvwr.msc"</strong>. <br />
+16) After "mainframe" is setup as a Host in DNS Manager, make sure the information in the panel is correct before moving on. <br />
   <br />
 <img src="https://i.imgur.com/a0SX9DJ.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -207,7 +170,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-17) Then, navigate to <strong>Find > [USERNAME] > Find All</strong>. This will show all the attempted logins that were rejected and accepted in the security tab. <br />
+17) Next, ping "mainframe", the result should be something like this. Notice how mainframe is mapped to 10.0.0.4. <br />
   <br />
 <img src="https://i.imgur.com/JdzsWYx.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -219,10 +182,10 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-18) As seen below, in the event viewer, you can see all logon attempts and make security decisions based off of them.  Here, we see all login attempts by <strong>bat.cop</strong> and can see where access was restored in the lab environment.</strong><br />
+18) Now we are going to change the IP address mapped to "mainframe" in dc-1 in the DNS Manager panel. Select "mainframe" and change the IP address to 8.8.8.8.</strong><br />
   <br />
 <img src="https://i.imgur.com/f2lVAMG.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
-  
+<img src="https://i.imgur.com/6vxWO8i.png" height="80%" width="60%" alt="Disk Sanitization Steps"/><br />  
 </p>
 <br />
 <br />
@@ -230,16 +193,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-19) Log into <strong>dc-1</strong> as an administrator, navigate to the search bar, and type <strong>"run"</strong>. Then, type <strong>"gpmc.msc"</strong>. <br />
-  <br />
-<img src="https://i.imgur.com/6vxWO8i.png" height="80%" width="60%" alt="Disk Sanitization Steps"/><br />
-</p>
-<br />
-<br />
-<br />
-
-<p>
-20) In the <strong>Group Policy Management</strong> window, <strong>[Right Click] Default Domain > Edit</strong>.  This will allow for the configuration of account lockout settings.<br />
+20) If you ping "mainframe" again, notice how the IP address listed is still mapping to 10.0.0.4.  The reason this is happening is because the IP address is saved in the DNS cache alongside other recent connections, we are going to clear the DNS cache so the IP address can be updated.<br />
   <br />
 <img src="https://i.imgur.com/t4JiBjY.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -249,7 +203,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-21) Navigate to: <strong>Account Lockout Policy > Account Lockout Duration | Account Lockout Threshold</strong>. <br />
+21) To see for ourselves, navigate again to PowerShell and type "ipconfig /displaydns > dns.txt" and "notepad dns.txt".
   <br />
 <img src="https://i.imgur.com/D4ug1wB.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -260,7 +214,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-22) Once in <strong>Account lockout duration Properties</strong>, select the desired time frame for an account to remain locked after being locked out.<br />
+22) Once the DNS cache is opened, we see here that "mainframe" is still associated with 10.0.0.4.  This configuration supercedes the DNS server's configuration, so until the cache is cleared the IP address will remain incorrectly mapped to 10.0.0.4.<br />
   <br />
 <img src="https://i.imgur.com/fHrNwui.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -273,7 +227,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-23) Then, navigate to <strong>Account lockout threshold properties</strong> and decide on a maximum threshold for consecutive login attempts, for this example it's set at 10.<br />
+23) If we navigate back to PowerShell in dc-1, and enter "ipconfig /flushdns" the DNS cache will clear and look to the DNS server for domain verification.<br />
   <br />
 <img src="https://i.imgur.com/R2K1ZsR.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -285,7 +239,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 
 
 <p>
-24) The end result should show something like this in <strong>Group Policy Management Editor</strong>.  Notice: Default settings for <strong>"Reset account lockout counter after" & "Allow Administrator account lockout"</strong> both automatically enable.<br />
+24) To test this theory, ping "mainframe" yet again and witness the alteration in the IP address, which now should be reading 8.8.8.8.<br />
   <br />
 <img src="https://i.imgur.com/t9YFbDG.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -296,7 +250,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-25) While the changes have been enabled, they would take 90 minutes to apply in the domain controller automatically.  To manually enable to configurations, login to the domain controller (dc-1) as an admin. <br />
+25) Now, we are going to setup a CNAME record in DNS Manager that points to www.google.com and observe the difference between this and the Alias we just completed. Navigate to dc-1 > Forward Lookup Zones > mydomain.com (created in previous tutorials on this github) > [Right Click] > [Select] New Alias(CNAME).  <br />
   <br />
 <img src="https://i.imgur.com/wjIgsuH.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -307,7 +261,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-26) Open the command prompt as an administrator, and type <strong>"gpupdate /force"</strong>.  As you can see, the updates should complete successfully.<br />
+26) Create an Alias named "search" and for fully qualified domain name(FQDN) enter "www.google.com".<br />
   <br />
 <img src="https://i.imgur.com/rx2Wvj6.png" height="80%" width="60%" alt="Disk Sanitization Steps"/> <br />
   
@@ -318,7 +272,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-27) While the changes have been enabled, they would take 90 minutes to apply in the domain controller automatically.  To manually enable to configurations, login to the domain controller (dc-1) as an admin. <br />
+27) Now, navigate to PowerShell in dc-1, ping "search" and "www.google.com" should map to that request, also it will return google's public IP address. <br />
   <br />
 <img src="https://i.imgur.com/XpckAdJ.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -329,7 +283,7 @@ This tutorial outlines common functions in Active Directory that are used to man
 <br />
 
 <p>
-28) Open the command prompt as an administrator, and type <strong>"gpupdate /force"</strong>.  As you can see, the updates should complete successfully.<br />
+28) Additionally, you can perform /nslookup search and "www.google.com" should return.<br />
   <br />
 <img src="https://i.imgur.com/BNh666T.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
