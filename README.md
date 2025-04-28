@@ -104,7 +104,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-10) Now, when navigating back to PowerShell and pinging "zebra" the connection should be successful.<br />
+8) Now, when navigating back to PowerShell and pinging "zebra" the connection should be successful.<br />
   <br />
 <img src="https://i.imgur.com/jDPfW8q.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -116,7 +116,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 
 
 <p>
-11) However, using the hosts file may serve a purpose occasionally; it's best to use a <strong>DNS server</strong> to store domain names and IP addresses.  Otherwise, we'd have to manually input the IP address into the host file every time it changes, a highly inefficient approach. In the next example, we will use DNS manager to map <strong>"mainframe"</strong>, an <strong>alias</strong>, to <strong>dc-1's</strong> private IP address. As you can see, in PowerShell <strong>"mainframe"</strong> still has not been mapped to an IP address, so we will add it to our <strong>DNS manager</strong>.<br />
+9) However, using the hosts file may serve a purpose occasionally; it's best to use a <strong>DNS server</strong> to store domain names and IP addresses.  Otherwise, we'd have to manually input the IP address into the host file every time it changes, a highly inefficient approach. In the next example, we will use DNS manager to map <strong>"mainframe"</strong>, an <strong>alias</strong>, to <strong>dc-1's</strong> private IP address. As you can see, in PowerShell <strong>"mainframe"</strong> still has not been mapped to an IP address, so we will add it to our <strong>DNS manager</strong>.<br />
   <br />
   <br />
 <img src="https://i.imgur.com/H2fKLkj.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
@@ -130,7 +130,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 
 
 <p>
-12) Begin by logging into <strong>dc-1</strong> and navigating to <strong>"DNS"</strong> and running it as an administrator. <br />
+10) Begin by logging into <strong>dc-1</strong> and navigating to <strong>"DNS"</strong> and running it as an administrator. <br />
   <br />
 <img src="https://i.imgur.com/njmnuwZ.png" height="80%" width="60%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -140,7 +140,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-13) Once in DNS Manager, navigate to <strong>dc-1 > Forward Lookup Zones > mydomain.com (created in previous tutorials on this github) > [Right Click] > [Select] New Host (A or AAAA)</strong>. <br />
+11) Once in DNS Manager, navigate to <strong>dc-1 > Forward Lookup Zones > mydomain.com (created in previous tutorials on this github) > [Right Click] > [Select] New Host (A or AAAA)</strong>. <br />
   <br />
 <img src="https://i.imgur.com/dv7bbZg.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
  
@@ -152,7 +152,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 
 
 <p>
-14) Name the Host <strong>"mainframe"</strong> and map it to dc-1's local IP address (10.0.0.4 in this case).<br />
+12) Name the Host <strong>"mainframe"</strong> and map it to dc-1's local IP address (10.0.0.4 in this case).<br />
   <br />
 <img src="https://i.imgur.com/efsWCSr.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -161,7 +161,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-15) After <strong>"mainframe"</strong> is setup as a Host in <strong>DNS Manager</strong>, make sure the information in the panel is correct before moving on. <br />
+13) After <strong>"mainframe"</strong> is setup as a Host in <strong>DNS Manager</strong>, make sure the information in the panel is correct before moving on. <br />
   <br />
 <img src="https://i.imgur.com/a0SX9DJ.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -171,7 +171,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-16) Next, ping <strong>"mainframe"</strong>, the result should be something like this. Notice how <strong>mainframe is mapped to 10.0.0.4</strong>. <br />
+14) Next, ping <strong>"mainframe"</strong>, the result should be something like this. Notice how <strong>mainframe is mapped to 10.0.0.4</strong>. <br />
   <br />
 <img src="https://i.imgur.com/JdzsWYx.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -183,7 +183,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 
 
 <p>
-17) Now we are going to change the IP address mapped to "mainframe" in dc-1 in the DNS Manager panel. Select "mainframe" and change the IP address to 8.8.8.8.</strong><br />
+15) Now we are going to change the IP address mapped to "mainframe" in dc-1 in the DNS Manager panel. Select "mainframe" and change the IP address to 8.8.8.8.</strong><br />
   <br />
 <img src="https://i.imgur.com/f2lVAMG.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
 <img src="https://i.imgur.com/6vxWO8i.png" height="80%" width="60%" alt="Disk Sanitization Steps"/><br />  
@@ -194,7 +194,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-18) If you ping "mainframe" again, notice how the IP address listed is still mapping to 10.0.0.4.  The reason this is happening is because the IP address is saved in the DNS cache alongside other recent connections, we are going to clear the DNS cache so the IP address can be updated.<br />
+16) If you ping "mainframe" again, notice how the IP address listed is still mapping to 10.0.0.4.  The reason this is happening is because the IP address is saved in the DNS cache alongside other recent connections, we are going to clear the DNS cache so the IP address can be updated.<br />
   <br />
 <img src="https://i.imgur.com/t4JiBjY.png" height="80%" width="100%" alt="Disk Sanitization Steps"/><br />
 </p>
@@ -204,7 +204,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-19) To see for ourselves, navigate again to PowerShell and type "ipconfig /displaydns > dns.txt" and "notepad dns.txt".
+17) To see for ourselves, navigate again to PowerShell and type "ipconfig /displaydns > dns.txt" and "notepad dns.txt".
   <br />
 <img src="https://i.imgur.com/D4ug1wB.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -215,7 +215,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 
 
 <p>
-20) Once the DNS cache is opened, we see here that "mainframe" is still associated with 10.0.0.4.  This configuration supercedes the DNS server's configuration, so until the cache is cleared the IP address will remain incorrectly mapped to 10.0.0.4.<br />
+18) Once the DNS cache is opened, we see here that "mainframe" is still associated with 10.0.0.4.  This configuration supercedes the DNS server's configuration, so until the cache is cleared the IP address will remain incorrectly mapped to 10.0.0.4.<br />
   <br />
 <img src="https://i.imgur.com/fHrNwui.png" height="80%" width="80%" alt="Disk Sanitization Steps"/> <br />
 </p>
@@ -228,7 +228,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 
 
 <p>
-21) If we navigate back to <strong>PowerShell</strong> in <strong>dc-1</strong>, and enter <strong>"ipconfig /flushdns"</strong> the DNS cache will clear and look to the DNS server for domain verification.<br />
+19) If we navigate back to <strong>PowerShell</strong> in <strong>dc-1</strong>, and enter <strong>"ipconfig /flushdns"</strong> the DNS cache will clear and look to the DNS server for domain verification.<br />
   <br />
 <img src="https://i.imgur.com/R2K1ZsR.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -240,7 +240,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 
 
 <p>
-22) To test this theory, ping <strong>"mainframe"</strong> yet again and witness the alteration in the IP address, which now should be returning <strong>8.8.8.8</strong>.<br />
+20) To test this theory, ping <strong>"mainframe"</strong> yet again and witness the alteration in the IP address, which now should be returning <strong>8.8.8.8</strong>.<br />
   <br />
 <img src="https://i.imgur.com/t9YFbDG.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -251,7 +251,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-23) Now, we are going to setup a <strong>CNAME record</strong> in DNS Manager that points to www.google.com and observe the difference between this and the Alias we just completed. Navigate to <strong>dc-1 > Forward Lookup Zones > mydomain.com (created in previous tutorials on this github) > [Right Click] > [Select] New Alias(CNAME)</strong>.  <br />
+21) Now, we are going to setup a <strong>CNAME record</strong> in DNS Manager that points to www.google.com and observe the difference between this and the Alias we just completed. Navigate to <strong>dc-1 > Forward Lookup Zones > mydomain.com (created in previous tutorials on this github) > [Right Click] > [Select] New Alias(CNAME)</strong>.  <br />
   <br />
 <img src="https://i.imgur.com/wjIgsuH.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -262,7 +262,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-24) Create an Alias named <strong>"search"</strong> and for fully qualified domain name(FQDN) enter <strong>"www.google.com"</strong>.<br />
+22) Create an Alias named <strong>"search"</strong> and for fully qualified domain name(FQDN) enter <strong>"www.google.com"</strong>.<br />
   <br />
 <img src="https://i.imgur.com/rx2Wvj6.png" height="80%" width="60%" alt="Disk Sanitization Steps"/> <br />
   
@@ -273,7 +273,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-25) Now, navigate to PowerShell in dc-1, ping <strong>"search"</strong> and <strong>"www.google.com"</strong> should map to that request, also it will return google's public IP address. <br />
+23) Now, navigate to PowerShell in dc-1, ping <strong>"search"</strong> and <strong>"www.google.com"</strong> should map to that request, also it will return google's public IP address. <br />
   <br />
 <img src="https://i.imgur.com/XpckAdJ.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
@@ -284,7 +284,7 @@ This demonstration will help strengthen knowledge of concepts surrounding DNS se
 <br />
 
 <p>
-26) Additionally, you can perform <strong>"/nslookup search"</strong> and <strong>"www.google.com"</strong> should return.<br />
+24) Additionally, you can perform <strong>"/nslookup search"</strong> and <strong>"www.google.com"</strong> should return.<br />
   <br />
 <img src="https://i.imgur.com/BNh666T.png" height="80%" width="100%" alt="Disk Sanitization Steps"/> <br />
   
