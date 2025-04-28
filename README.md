@@ -1,9 +1,9 @@
 <p align="center">
-<img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
+<img src="https://i.imgur.com/UXuRdG1.png" height="40%" width="60%" alt="Disk Sanitization Steps"/><br />
 </p>
 
-<h1>Active Directory: Group Policy & Account Management in the Cloud (Azure)(3/3)</h1>
-This tutorial outlines common functions in Active Directory that are used to manage group policy and users.<br />
+<h1>DNS: DNS Manager Experimentation on the Cloud (Azure)</h1>
+This demonstration will help strengthen knowledge of concepts surrounding DNS servers.  In this demonstration, I'll be using two virtual machines, Client-1 & DC-1, which are two virtual machines created in previous projects on this GitHub.<br />
 
 
 <h2>Environments and Technologies Used</h2>
@@ -11,18 +11,19 @@ This tutorial outlines common functions in Active Directory that are used to man
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
 - PowerShell
+- DNS Manager
 
 <h2>Operating Systems Used </h2>
 
 - Windows Server 2022
 - Windows 10 (21H2)
   
-<h2>High-Level Group Policy & Account Management Steps</h2>
+<h2>High-Level DNS Management Steps</h2>
 
-- Managing Account Lockouts
-- Resetting Account Passwords
-- Enabling & Disabling Accounts
-- Observing Logs
+- Logging into DC-1 & Client 1
+- Alias Record Exercise
+- Local DNS Cache Exercise
+- CNAME Record Exercise
 
 
 <h2>Group Policy & Account Management Steps</h2>
